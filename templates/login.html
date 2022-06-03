@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div class="container">
+    <form action="/login" method="post">
+        <div class="form-group mb-3">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group mb-3">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-dark mb-3" type="submit">Log In</button>
+        <div>
+            <a class="text-light" href="/register">Don't have an account? Click here to make one.</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

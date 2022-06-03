@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div class="mb-3">
+    <p class="display-3 text-light p1" id="joke"></p>
+</div>
+<div class="mb-3">
+    <p class="display-1 text-light p2" id="punchline"></p>
+</div>
+<div>
+        <button id="generate" type="button" class="btn btn-dark">Generate a joke</button>
+        <button id="favorites" type="button" class="btn btn-dark" value="">Add to Favorites</button>
+</div>
+<script src="/static/js/ajax.js"></script>
+
+{% endblock %}

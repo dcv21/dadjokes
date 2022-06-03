@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <!-- https://getbootstrap.com/docs/5.0/ -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+        <link href="/static/img/favicon.ico" rel="icon">
+
+        <!-- https://getbootstrap.com/docs/5.0/ -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+        <!-- https://api.jquery.com/ -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <title>Dad Jokes Generator</title>
+
+        <style>
+
+            html, body {
+                background-image: url("static/img/bgdark.jpg");
+                background-size: 100vw 100vh;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+            }
+
+            main .form-control
+            {
+                /* Center form controls */
+                display: inline-block;
+
+                /* Override Bootstrap's 100% width for form controls */
+                width: auto;
+            }
+
+            .form-control:focus {
+              border-color: #FFFFFF;
+              box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.075), 0 0 8px rgba(255, 255, 255, 0.6);
+            }
+
+        </style>
+
+    </head>
+
+    <body id="page-favorites">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="/">JOKES</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/favorites">Favorites</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/logout">Log out</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'message' %}
+                        <header>
+                            <div class="alert alert-success text-center" role="alert">
+                                {{ message }}
+                            </div>
+                        </header>
+                    {% else %}
+                        <header>
+                            <div class="alert alert-danger text-center" role="alert">
+                                {{ message }}
+                            </div>
+                        </header>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <main class="container-fluid text-center">
+
+            <div class="flex-fill">
+                <table class="table align-middle text-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Jokes</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for joke in jokes %}
+
+                            <tr>
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>
+                                    <p id={{ loop.index }}>{{ joke.joke }}</p>
+                                    <p>{{ joke.punchline }}</p>
+                                </td>
+                                <td><button id="delete" type="button" class="btn btn-dark" value={{ loop.index }}>Remove</button></td>
+                            </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+
+        <footer class="small text-center text-muted mb-3">
+            Made by Duong Chan Viet
+        </footer>
+
+        <script src="/static/js/ajax.js"></script>
+
+    </body>
+
+</html>
